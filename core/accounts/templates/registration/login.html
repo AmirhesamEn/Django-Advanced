@@ -1,0 +1,31 @@
+<!-- login.html -->
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <title>فرم ورود</title>
+</head>
+<body>
+    <h2>ورود به سایت</h2>
+    <form action="/swagger/" method="post">
+        {% csrf_token %}
+
+        <label for="email">ایمیل:</label><br>
+        <input type="email" id="email" name="email" required><br><br>
+
+        <label for="password">رمز عبور:</label><br>
+        <input type="password" id="password" name="password" required><br><br>
+
+        <!-- hidden field برای next -->
+        {% if next %}
+            <input type="hidden" name="next" value="{{ next }}">
+        {% endif %}
+
+        <button type="submit">ورود</button>
+    </form>
+
+    {% if msg %}
+        <p style="color:red;">{{ msg }}</p>
+    {% endif %}
+</body>
+</html>

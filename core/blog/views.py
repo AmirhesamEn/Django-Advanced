@@ -3,6 +3,8 @@ from django.views.generic.base import TemplateView
 from django.views.generic import ListView
 
 from blog.models import Post
+
+
 # Create your views here.
 
 class IndexView(TemplateView):
@@ -24,5 +26,4 @@ class PostListView(ListView):
 
     def get_queryset(self):
         return super().get_queryset()
-    
     

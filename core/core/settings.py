@@ -38,7 +38,13 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "accounts",
-    "blog"
+    "blog",
+    'rest_framework',
+    "rest_framework.authtoken",
+    'django_filters',
+    'drf_yasg',
+    'rest_framework_simplejwt',
+    'mail_templated',
 ]
 
 MIDDLEWARE = [
@@ -53,10 +59,14 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = "core.urls"
 
+# import os
+# BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [BASE_DIR / 'templates'],
+        # "DIRS": [os.path.join(BASE_DIR), 'templates'],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -131,3 +141,26 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # user manager config 
 AUTH_USER_MODEL= "accounts.User"
+
+
+# restframework settings
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES':[
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ]
+    
+
+}
+
+# email config
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = False
+EMAIL_HOST = 'smtp4dev'
+EMAIL_HOST_USER = ''        # ایمیل خودت
+EMAIL_HOST_PASSWORD = ''   # پسورد اپلیکیشن یا معمولی
+EMAIL_PORT = 25

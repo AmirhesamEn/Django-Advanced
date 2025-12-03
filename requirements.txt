@@ -1,3 +1,16 @@
+# general module
 Django>=5.0
 python-decouple>=3.8
 pillow
+djangorestframework
+
+# third party module
+markdown      
+django-filter 
+drf-yasg[validation]
+djangorestframework_simplejwt
+
+
+
+# email third party module
+django-mail-templated
