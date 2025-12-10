@@ -1,0 +1,23 @@
+{
+    "python.testing.unittestArgs": [
+        "-v",
+        "-s",
+        "./core",
+        "-p",
+        "test_*.py"
+    ],
+    "python.testing.pytestEnabled": false,
+    "python.testing.unittestEnabled": true,
+
+    // تنظیم مسیر کاری (اختیاری، اما توصیه می‌شود)
+    "python.testing.cwd": "${workspaceFolder}", 
+
+    // *** تعریف متغیرهای محیطی برای رفع خطای ImproperlyConfigured ***
+    "python.testing.env": {
+        // نام ماژول تنظیمات شما (با فرض اینکه فایل شما در core/settings.py است)
+        "DJANGO_SETTINGS_MODULE": "core.settings", 
+        
+        // اطمینان از اینکه پایتون می‌تواند ماژول‌های داخلی پروژه را پیدا کند.
+        "PYTHONPATH": "${workspaceFolder}" 
+    }
+}
