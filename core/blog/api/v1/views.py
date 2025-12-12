@@ -1,9 +1,10 @@
 # from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import (
     IsAuthenticated,
-    # IsAuthenticatedOrReadOnly,
+    IsAuthenticatedOrReadOnly,
 )
 from rest_framework.response import Response
+
 # from rest_framework.generics import (
 #     ListCreateAPIView,
 #     RetrieveUpdateDestroyAPIView,
@@ -62,9 +63,10 @@ from .permissions import IsOwnerOrReadOnly
 
 
 class PostModelViewSet(viewsets.ModelViewSet):
-    permission_classes = [IsAuthenticated, IsOwnerOrReadOnly]
+    # permission_classes = [IsAuthenticated, IsOwnerOrReadOnly]
+    permission_classes = [IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
     serializer_class = PostSerializer
-    queryset = Post.objects.all()
+    queryset = Post.objects.all().order_by("-published_date")
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
     filterset_fields = ["category", "author", "status"]
     search_fields = ["title"]

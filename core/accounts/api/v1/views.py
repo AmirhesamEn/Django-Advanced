@@ -67,9 +67,8 @@ class CustomObtainAuthToken(ObtainAuthToken):
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data["user"]
         token, created = Token.objects.get_or_create(user=user)
-        return Response(
-            {"token": token.key, "user_id": user.pk, "email": user.email}
-        )
+        return Response({"token": token.key,
+                         "user_id": user.pk, "email": user.email})
 
 
 class CustomDiscardAuthToken(APIView):
@@ -213,9 +212,8 @@ class ActivationApiView(APIView):
     def get(self, request, token, *args, **kwargs):
 
         try:
-            token = jwt.decode(
-                token, settings.SECRET_KEY, algorithms=["HS256"]
-            )
+            token = jwt.decode(token, settings.SECRET_KEY,
+                               algorithms=["HS256"])
             user_id = token.get("user_id")
         except ExpiredSignatureError:
             return Response(
@@ -230,16 +228,13 @@ class ActivationApiView(APIView):
 
         user = User.objects.get(id=user_id)
         if user.is_verified:
-            return Response(
-                {"detail": "your account has already been verified"}
-            )
+            return Response({"detail":
+                             "your account has already been verified"})
         user.is_verified = True
         user.save()
         return Response(
-            {
-                "detail": "your account have been verified "
-                "and activated successfully"
-            }
+            {"detail": "your account have been verified"
+             "and activated successfully"}
         )
 
 

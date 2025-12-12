@@ -19,7 +19,7 @@ from django.contrib import admin
 from django.urls import include, path
 from django.conf import settings
 from django.conf.urls.static import static
-from rest_framework.documentation import include_docs_urls
+# from rest_framework.documentation import include_docs_urls
 
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
@@ -62,10 +62,8 @@ urlpatterns = [
     # path('api-docs/', include_docs_urls(title="API")),
 ]
 
-if settings.DEBUG == True:
-    urlpatterns += static(
-        settings.STATIC_URL, docoument_root=settings.STATIC_ROOT
-    )
-    urlpatterns += static(
-        settings.MEDIA_URL, docoument_root=settings.MEDIA_ROOT
-    )
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL,
+                          docoument_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL,
+                          docoument_root=settings.MEDIA_ROOT)

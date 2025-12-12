@@ -65,8 +65,7 @@ class CustomAuthTokenSerializer(serializers.Serializer):
                 raise serializers.ValidationError(msg, code="authorization")
             if not user.is_verified:
                 raise serializers.ValidationError(
-                    {"detail": "user is not verified"}
-                )
+                    {"detail": "user is not verified"})
         else:
             msg = _('Must include "username" and "password".')
             raise serializers.ValidationError(msg, code="authorization")
@@ -80,8 +79,7 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
         validated_data = super().validate(attrs)
         if not self.user.is_verified:
             raise serializers.ValidationError(
-                {"detail": "user is not verified"}
-            )
+                {"detail": "user is not verified"})
         validated_data["test"] = "Ohh joffry is my love"
         validated_data["email"] = self.user.email
         validated_data["user_id"] = self.user.id
@@ -97,16 +95,14 @@ class ChangePasswordSerializer(serializers.Serializer):
     def validate(self, attrs):
         if attrs.get("new_password") != attrs.get("new_password1"):
             raise serializers.ValidationError(
-                {"detail": "password doesn't match"}
-            )
+                {"detail": "password doesn't match"})
 
         try:
             validate_password(attrs.get("new_password"))
 
         except exceptions.ValidationError as e:
             raise serializers.ValidationError(
-                {"new_password": list(e.messages)}
-            )
+                {"new_password": list(e.messages)})
 
         return super().validate(attrs)
 
@@ -145,8 +141,7 @@ class ActivationResendSerializer(serializers.Serializer):
             user_obj = User.objects.get(email=email)
         except User.DoesNotExist:
             raise serializers.ValidationError(
-                {"detail": "account dosent exist"}
-            )
+                {"detail": "account dosent exist"})
 
         if user_obj.is_verified:
             raise serializers.ValidationError(
