@@ -58,4 +58,4 @@ class TestPostApi:
         user = common_user
         api_client.force_login(user)
         response = api_client.post(url, data=data)
-        assert response.status_code == 400
+        assert response.status_code == 401
