@@ -34,3 +34,7 @@ class PostDetailView(LoginRequiredMixin, DetailView):
     model = Post
     context_object_name = "post"
     template_name = "blog/detail.html"
+
+class PostListApiView(TemplateView):
+    template_name = 'blog/post_list_api.html'
+    
