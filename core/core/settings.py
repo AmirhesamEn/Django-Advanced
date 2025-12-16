@@ -52,11 +52,13 @@ INSTALLED_APPS = [
     "rest_framework_simplejwt",
     "mail_templated",
     "djoser",
+    "corsheaders"
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "corsheaders.middleware.CorsMiddleware", # this is for corsheaders
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -174,3 +176,11 @@ EMAIL_PORT = 25
 # برای هشدار سواگر در تست
 # جلوگیری از هشدار Renderer های Swagger
 SWAGGER_USE_COMPAT_RENDERERS = False
+
+
+
+# CORS_ALLOWED_ORIGINS = [
+#     "http://127.0.0.1:5500",
+# ]
+
+CORS_ALLOW_ALL_ORIGINS = True

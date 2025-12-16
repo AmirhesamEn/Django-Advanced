@@ -10,7 +10,7 @@ django-filter
 drf-yasg[validation]
 djangorestframework_simplejwt
 djoser
-
+django-cors-headers
 
 
 # email third party module
